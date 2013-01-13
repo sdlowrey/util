@@ -1,0 +1,44 @@
+#!/bin/bash
+#
+# Grab source RPM from net, prep source, and copy to new dir
+
+builddir=~/rpmbuild
+name=$1
+
+# check sanity.  assume rpmbuild dir in $HOME.
+if [ ! -r ~/.rpmmacros ]; then
+    echo "Run rpmdev-setuptree first."
+    exit 9
+fi
+if [ ! -d ~/rpmbuild ]; then
+    echo "Need rpmbuild dir in home dir. Sorry."
+    exit 8
+fi
+
+echo "Fetching source RPM ..."
+if ! yumdownloader --source $name > /dev/null; then
+    echo "Cannot find $name"
+    exit 1
+fi
+
+if ! rpmname=$(ls $name*.src.rpm 2> /dev/null); then
+    echo "Can't find $name SRPM we (apparently) just fetched"
+    exit 2
+fi
+
+rpmdev-wipetree
+echo "Building $rpmname ..."
+rpm -i $rpmname
+rpmbuild -bp --nodeps $builddir/SPECS/* > /dev/null 2>&1
+
+# Move it
+srcdir=$(cd $builddir/BUILD; ls)
+echo "Moving $srcdir to $name directory ..." 
+mkdir -p ~/$name
+if [ -d $name/$srcdir ]; then
+    echo "$srcdir is already in $bash directory"
+    exit 3
+fi
+mv $builddir/BUILD/* ~/$name
+
+echo "Complete"
