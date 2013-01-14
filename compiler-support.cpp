@@ -3,10 +3,7 @@
 
 using namespace std;
 
-#define xstr(s) str(s)
-#define str(s) #s
-
 int main() 
 {
-	cout << "Compiler C++ standard: " << xstr(__cplusplus) << endl;
+	cout << "Compiler C++ standard: " << __cplusplus << endl;
 }
