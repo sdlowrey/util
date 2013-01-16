@@ -41,4 +41,7 @@ if [ -d $name/$srcdir ]; then
 fi
 mv $builddir/BUILD/* ~/$name
 
+echo "Saving source RPM..."
+mv $rpmname ~/name
+
 echo "Complete"
