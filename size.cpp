@@ -2,17 +2,18 @@
 
 using namespace std;
 
+#define bitsize(t) sizeof(t) * 8
+
 int main() 
 {
-	string msg = "size of ";
-	cout << msg << "bool: " << sizeof(bool) * 8 << " bits" << endl;
-	cout << msg << "char: " << sizeof(char) * 8 << " bits" << endl;
-	cout << msg << "char16_t: " << sizeof(char16_t) * 8 << " bits" << endl;
-	cout << msg << "wchar_t: " << sizeof(wchar_t) * 8 << " bits" << endl;
-	cout << msg << "short: " << sizeof(short) * 8 << " bits" << endl;
-	cout << msg << "int: " << sizeof(int) * 8 << " bits" << endl;
-	cout << msg << "long: " << sizeof(long) * 8 << " bits" << endl;
-	cout << msg << "long long: " << sizeof(long long) * 8 << " bits" << endl;
-	cout << msg << "double: " << sizeof(double) * 8 << " bits" << endl;
-	cout << msg << "long double: " << sizeof(long double) * 8 << " bits" << endl;
+	cout << "bool: " << bitsize(bool) << " bits" << endl;
+	cout << "char: " << bitsize(char) << " bits" << endl;
+	cout << "char16_t: " << bitsize(char16_t) << " bits" << endl;
+	cout << "wchar_t: " << bitsize(wchar_t) << " bits" << endl;
+	cout << "short: " << bitsize(short) << " bits" << endl;
+	cout << "int: " << bitsize(int) << " bits" << endl;
+	cout << "long: " << bitsize(long) << " bits" << endl;
+	cout << "long long: " << bitsize(long long) << " bits" << endl;
+	cout << "double: " << bitsize(double) << " bits" << endl;
+	cout << "long double: " << bitsize(long double) << " bits" << endl;
 }
