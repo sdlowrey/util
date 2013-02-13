@@ -42,6 +42,6 @@ fi
 mv $builddir/BUILD/* ~/$name
 
 echo "Saving source RPM..."
-mv $rpmname ~/name
+mv $rpmname ~/$name
 
 echo "Complete"

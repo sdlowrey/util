@@ -2,17 +2,32 @@
 
 using namespace std;
 
+// Cannot figure out how to pass types without using a macro
+#define bitsize(t) to_string(sizeof(t) * 8)
+
+void log(string msg)
+{
+	cout << msg << endl;
+};
+
 int main() 
 {
-	string msg = "size of ";
-	cout << msg << "bool: " << sizeof(bool) * 8 << " bits" << endl;
-	cout << msg << "char: " << sizeof(char) * 8 << " bits" << endl;
-	cout << msg << "char16_t: " << sizeof(char16_t) * 8 << " bits" << endl;
-	cout << msg << "wchar_t: " << sizeof(wchar_t) * 8 << " bits" << endl;
-	cout << msg << "short: " << sizeof(short) * 8 << " bits" << endl;
-	cout << msg << "int: " << sizeof(int) * 8 << " bits" << endl;
-	cout << msg << "long: " << sizeof(long) * 8 << " bits" << endl;
-	cout << msg << "long long: " << sizeof(long long) * 8 << " bits" << endl;
-	cout << msg << "double: " << sizeof(double) * 8 << " bits" << endl;
-	cout << msg << "long double: " << sizeof(long double) * 8 << " bits" << endl;
+	log("Primitive types");
+	log("---------------");
+	log("bool:         " + bitsize(bool) + " bits");
+	log("char:         " + bitsize(char) + " bits");
+	log("char16_t:     " + bitsize(char16_t) + " bits");
+	log("wchar_t:      " + bitsize(wchar_t) + " bits");
+	log("short:        " + bitsize(short) + " bits");
+	log("int:          " + bitsize(int) + " bits");
+	log("long:         " + bitsize(long) + " bits");
+	log("long long:    " + bitsize(long long) + " bits");
+	log("double:       " + bitsize(double) + " bits");
+	log("long double:  " + bitsize(long double) + " bits");
+	log("");
+	log("System Things");
+	log("-------------");
+#ifdef _SC_PAGESIZE
+	log("_SC_PAGESIZE: " + to_string(sysconf(_SC_PAGESIZE)));
+#endif
 }
