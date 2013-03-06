@@ -9,7 +9,7 @@ class Base
 {
 public:
 	Base() { log("Base ctor"); };
-	Base(int a) : baseA(a) { log("Base ctor with param"); };
+	Base(int a) : baseA(a) { log("Base converting ctor"); };
 	virtual ~Base() = default;
 	int A() { return baseA; };
 private:
