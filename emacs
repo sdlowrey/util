@@ -38,11 +38,11 @@
  '(case-fold-search t)
  '(column-number-mode t)
  '(current-language-environment "UTF-8")
+ '(custom-enabled-themes (quote (tango-dark)))
  '(default-input-method "rfc1345")
  '(global-font-lock-mode t nil (font-lock))
  '(inhibit-startup-screen t)
  '(mouse-wheel-mode t nil (mwheel))
- '(scroll-bar-mode left)
  '(tool-bar-mode nil nil (tool-bar)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
