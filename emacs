@@ -22,6 +22,9 @@
 (setq frame-title-format
       (concat  "%b - emacs@" (system-name)))
 
+;; prevent duplication of compilation buffer
+(setq-default display-buffer-reuse-frames t)
+
 ;; default to unified diffs
 (setq diff-switches "-u")
 
