@@ -6,7 +6,14 @@ if [ -f /etc/bashrc ]; then
 fi
 
 # Command shortcuts
+
+# color ls not the default on rhel5
+alias ls='ls --color'
+
 alias la='ls -a'
 alias ll='ls -l'
 alias lrt='ls -lrt'
 
+# for sipe/lync
+export NSS_SSL_CBC_RANDOM_IV=0
+export SUDO_EDITOR=emacs
