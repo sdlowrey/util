@@ -10,3 +10,4 @@ alias la='ls -a'
 alias ll='ls -l'
 alias lrt='ls -lrt'
 
+export EDITOR=emacs
