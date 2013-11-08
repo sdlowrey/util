@@ -1,0 +1,28 @@
+#!/bin/bash
+# FIXME get options and range from cmdline
+
+# number of requests
+COUNT=1
+
+# time to wait for a response
+TIMEOUT=2
+
+# base address range to scan
+RANGE=10.20.0
+
+# scan range min and max
+MIN=1
+MAX=255
+
+let found=0
+for i in $(seq $MIN $MAX); do
+    echo -n "$RANGE.$i: "
+    if ping -c $COUNT -w $TIMEOUT $RANGE.$i > /dev/null; then
+	echo "ok"
+	let ++found
+    else
+	echo "no response"
+    fi
+done
+let numpinged=$MAX-$MIN
+echo "Got $found responses from $numpinged addresses"
