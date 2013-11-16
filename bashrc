@@ -13,7 +13,7 @@ alias ls='ls --color'
 alias la='ls -a'
 alias ll='ls -l'
 alias lrt='ls -lrt'
-
+alias diff='diff --exclude="*~"'
 # for sipe/lync
 export NSS_SSL_CBC_RANDOM_IV=0
 export SUDO_EDITOR=emacs
