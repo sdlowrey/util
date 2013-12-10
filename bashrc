@@ -15,6 +15,7 @@ alias ll='ls -l'
 alias lrt='ls -lrt'
 
 export EDITOR=emacs
+alias diff='diff --exclude="*~"'
 
 # SILO-only changes follow
 

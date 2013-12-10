@@ -1,0 +1,10 @@
+#!/bin/bash
+# the file in /etc/sysctl.d doesn't seem to have an effect
+# this script will call it and remove the filter
+
+sysctl -p /etc/sysctl.d/libvirtd.conf
+
+#sysctl net.bridge.bridge-nf-call-arptables=0
+#sysctl net.bridge.bridge-nf-call-ip6tables=0
+#sysctl net.bridge.bridge-nf-call-iptables=0
+

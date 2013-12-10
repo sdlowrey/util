@@ -9,12 +9,12 @@ if [ -z "$2" ] ; then
    exit 1
 fi
 
-if [ -z "$URL" ] ; then
-   echo "set URL to your svn credentials (export URL=svn+ssh://username@dev-svn.dev.sciencelogic.local/svn), and try again"
+if [ -z "$SVN_URL" ] ; then
+   echo "set SVN_URL to your svn credentials (export SVN_URL=svn+ssh://username@dev-svn.dev.sciencelogic.local/svn), and try again"
    exit 1
 fi
 
-svn checkout ${URL}/${branch} $wtree --depth immediates
+svn checkout ${SVN_URL}/${branch} $wtree --depth immediates
 
 for dir in $(ls $wtree) ; do
    if [ "$dir" == "G3code" ] ; then
