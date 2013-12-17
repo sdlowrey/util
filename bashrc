@@ -13,8 +13,12 @@ alias ls='ls --color'
 alias la='ls -a'
 alias ll='ls -l'
 alias lrt='ls -lrt'
+
+export EDITOR=emacs
 alias diff='diff --exclude="*~"'
+
+# SILO-only changes follow
+
 # for sipe/lync
 export NSS_SSL_CBC_RANDOM_IV=0
-export SUDO_EDITOR=emacs
 export SVN_URL=svn+ssh://slowrey@dev-svn/svn
