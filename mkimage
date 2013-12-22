@@ -24,7 +24,8 @@ def parse_cmdline():
     parser = argparse.ArgumentParser(description="Create a Linux disk image")
     parser.add_argument('base_dir', metavar='BASE_DIR',
                         help="directory where image is created and mounted")
-    parser.add_argument('--size', default=BLOCK_COUNT, help='size of the image in MiB ')
+    parser.add_argument('--size', default=BLOCK_COUNT, 
+                        help='size of the image in MiB ')
     return parser.parse_args()
     
 def cleanup_mounts(mpath):
@@ -42,27 +43,30 @@ def cleanup_mounts(mpath):
     check_call(['umount', mpath])
 
 def remove(mpath, ipath):
-    """Cleanup when during init or when errors prevent successful image creation.
+    """Umount and delete a mounted file.
 
     mpath: mount point
     ipath: path to image
     """
     if os.path.ismount(mpath):
+        print 'unmount {}'.format(mpath)
         check_call(['umount', mpath])
 
     if os.path.exists(ipath):
+        print 'deleting {}'.format(ipath)
         os.remove(ipath)
 
-def create_image(basedir, blkcount):
+def create_image(target, blkcount):
     """
     Create an empty image file and mount it.
     
-    size: gigabytes
+    target: directory to place image and mount point
+    blkcount: number of 1MB blocks
     """
     commands = []
     
-    image = '{}/{}'.format(basedir, IMAGE_NAME)
-    mount_path = '{}/mnt'.format(basedir)
+    image = '{}/{}'.format(target, IMAGE_NAME)
+    mount_path = '{}/mnt'.format(target)
     remove(mount_path, image)
 
     if_arg = 'if=/dev/zero'
@@ -76,13 +80,15 @@ def create_image(basedir, blkcount):
     
     try:
         for cmd in commands:
+            print 'executing: {}.format(cmd)'
             check_call(cmd)
     except CalledProcessError, e:
-        remove_image()
+        print 'error: {}'.format(e.strerror)
+        remove(image)
         raise
 
-def make_device_files(target_dir, file_names):
-    cmd = ['MAKEDEV', '-d', '{}/dev'.format(target_dir), '-x', 'dummy']
+def make_device_files(target, file_names):
+    cmd = ['MAKEDEV', '-d', '{}/dev'.format(target), '-x', 'dummy']
     last_arg = len(cmd) - 1
     for dev in file_names:
         cmd[last_arg] = dev
@@ -92,6 +98,7 @@ def make_directories(target, dirs, fail_exists=False):
     """
     Make multiple directories, including intermediate parents.
     
+    target: base directory
     dirs: a sequence of strings containing relative path names
     target_root: the directory to create in
     fail_exists: don't bail out if the directory is already there
