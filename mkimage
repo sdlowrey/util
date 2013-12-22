@@ -80,7 +80,7 @@ def create_image(target, blkcount):
     
     try:
         for cmd in commands:
-            print 'executing: {}.format(cmd)'
+            print 'executing: {}'.format(cmd)
             check_call(cmd)
     except CalledProcessError, e:
         print 'error: {}'.format(e.strerror)
