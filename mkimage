@@ -6,7 +6,6 @@ from math import pow
 import os
 from subprocess import check_call, CalledProcessError
 
-IMAGE_NAME = 'em7-base.img'
 BLOCK_SIZE = pow(2, 20) # 1 MiB
 BLOCK_SIZE_STR = '1M'
 
@@ -21,11 +20,16 @@ BIND_MOUNTS = ['dev', 'dev/pts', 'dev/shm', 'proc', 'sys']
 DEVICES = ['console', 'null', 'zero', 'urandom']
 
 def parse_cmdline():
-    parser = argparse.ArgumentParser(description="Create a Linux disk image")
+    parser = argparse.ArgumentParser(
+        description="Create a Linux root filesystem image")
+
     parser.add_argument('base_dir', metavar='BASE_DIR',
                         help="directory where image is created and mounted")
+    parser.add_argument('image_name', metavar="IMAGE_NAME",
+                        help='image name (extension not required)')
     parser.add_argument('--size', default=BLOCK_COUNT, 
-                        help='size of the image in MiB ')
+                        help='size of the image in MiB [500]')
+
     return parser.parse_args()
     
 def cleanup_mounts(mpath):
@@ -39,6 +43,7 @@ def cleanup_mounts(mpath):
     for path in BIND_MOUNTS.reverse():
         mount_point = '{}/{}'.format(mpath, path)
         if os.path.ismount(mount_point):
+            print 'unmounting {}'.format(mount_point)
             check_call(['umount', mount_point])
     check_call(['umount', mpath])
 
@@ -56,17 +61,17 @@ def remove(mpath, ipath):
         print 'deleting {}'.format(ipath)
         os.remove(ipath)
 
-def create_image(target, blkcount):
+def create_image(target_dir, image_name, blkcount):
     """
     Create an empty image file and mount it.
     
-    target: directory to place image and mount point
+    target_dir: directory to place image and mount point
     blkcount: number of 1MB blocks
     """
     commands = []
     
-    image = '{}/{}'.format(target, IMAGE_NAME)
-    mount_path = '{}/mnt'.format(target)
+    image = '{}/{}'.format(target_dir, image_name)
+    mount_path = '{}/mnt'.format(target_dir)
     remove(mount_path, image)
 
     if_arg = 'if=/dev/zero'
@@ -140,9 +145,10 @@ def prep_image(mount_dir):
 
 args = parse_cmdline()
 make_directories(args.base_dir, ['mnt'])
+create_image(args.base_dir, args.image_name + '.img', args.size)
 mount_dir = args.base_dir + '/mnt'
-create_image(args.base_dir, args.size)
 prep_image(mount_dir)
 print "image is mounted on {}".format(mount_dir)
-# uncomment this later.. for now assume user wants to work with the image
-#cleanup_mounts()
+print "TODO: install packages"
+    
+    
