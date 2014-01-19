@@ -33,6 +33,9 @@
 ;; always end a file with a newline
 (setq require-final-newline 'query)
 
+;; disable the bell
+(setq visible-bell t)
+
 ;; add php support
 ;; see http://stackoverflow.com/questions/898063/making-php-mode-and-other-cc-mode-derived-modes-compatible-with-emacs-23
 (autoload 'php-mode "php-mode" "Major mode for editing php code." t)
