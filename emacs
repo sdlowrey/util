@@ -1,5 +1,11 @@
 ;; .emacs
 
+(when (>= emacs-major-version 24)
+  (require 'package)
+  (package-initialize)
+  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+  )
+
 ;; nuke the splash screen and start msg
 (setq inhibit-splash-screet t)
 (setq inhibit-startup-message t)
@@ -12,15 +18,17 @@
 (global-set-key "\C-f" 'isearch-forward)
 
 ;; turn on font-lock mode
-(when (fboundp 'global-font-lock-mode)
-  (global-font-lock-mode t))
+;; fails on rhel5; global-font-lock is enabled by default anyway
+;(when (fboundp 'global-font-lock-mode)
+;  (global-font-lock-mode t))
 
 ;; enable visual feedback on selections
 ;(setq transient-mark-mode t)
 
 ;; default to better frame titles
-(setq frame-title-format
-      (concat  "%b - emacs@" (system-name)))
+;; this fails on rhel5
+;(setq frame-title-format
+;      (concat  "%b - emacs@" (system-name)))
 
 ;; prevent duplication of compilation buffer
 (setq-default display-buffer-reuse-frames t)
@@ -30,6 +38,15 @@
 
 ;; always end a file with a newline
 (setq require-final-newline 'query)
+
+;; disable the bell
+(setq visible-bell t)
+
+;; add php support
+;; see http://stackoverflow.com/questions/898063/making-php-mode-and-other-cc-mode-derived-modes-compatible-with-emacs-23
+(autoload 'php-mode "php-mode" "Major mode for editing php code." t)
+(add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
+(add-to-list 'auto-mode-alist '("\\.inc$" . php-mode))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

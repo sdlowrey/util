@@ -1,0 +1,9 @@
+#!/usr/bin/awk -f
+#
+# Filter lines that match regular expressions.  Print non-matching lines.
+
+/maint_prune/ { next }; 
+/maint_functions/ { next }; 
+/emitters/ { next }; 
+{ print }
+

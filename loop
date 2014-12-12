@@ -1,0 +1,41 @@
+#!/bin/bash
+#
+
+function usage {
+    echo "Usage: loop INTERVAL DURATION COMMAND"
+    echo ""
+    echo "Run COMMAND every INTERVAL seconds until DURATION is reached or exceeded."
+    echo
+    echo "Enclose COMMAND in single quotes if you want it to be evaluated at the"
+    echo "time of execution.  Otherwise, it will be executed once when loop is "
+    echo "invoked."
+    echo
+    echo "Example: loop 2 5 'touch file-name-$(date +'%Y-%m-%d_%H:%M:%S')'"
+    echo
+}
+
+while getopts :h OPT; do
+    case $OPT in
+	h|+h)
+	    usage
+	    exit 0
+	    ;;
+	*)
+	    usage
+	    exit 2
+    esac
+done
+shift $(( OPTIND - 1 ))
+OPTIND=1
+[[ $# -lt 3 ]] && usage && exit 1
+
+INTERVAL=$1
+DURATION=$2
+COMMAND=$3
+
+elapsed=0
+while (( $elapsed < $DURATION )); do 
+    eval $COMMAND
+    sleep $INTERVAL
+    let elapsed+=$INTERVAL
+done

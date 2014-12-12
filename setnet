@@ -1,0 +1,34 @@
+#!/bin/bash
+#
+# set the network up for home, work, etc
+#
+# usage: setnet home | work | both
+
+if [ $(id -u) -ne 0 ]; then
+    echo "gotta be root" && exit 1
+fi
+
+resolv="/etc/resolv.conf"
+if [ ! -r $resolv.$1 ]; then
+    echo "Usage: $(basename $0) home | work | both" && exit 2
+fi
+
+# set the immuatble attr on resolv.conf so network mgmt procs don't step on it.
+# e.g., dhclient doesn't like it when the file is not writable, yet cocks its head like
+# a puppy and walks away quietly if immutable is set.
+
+chattr -i $resolv
+cp $resolv.$1 $resolv
+chattr +i $resolv
+
+case $1 in
+    home)
+	# kill the bridge, start wireless
+	;;
+    work)
+	# kill wireless, start em1
+	;;
+    both)
+	# kill the bridge, start wireless, start VPN
+	;;
+esac

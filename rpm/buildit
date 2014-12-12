@@ -1,0 +1,11 @@
+#!/bin/bash
+
+echo "Test: override _specdir" 
+if rpmbuild -bp --define "_specdir $PWD" test.spec 2> /dev/null; then
+    echo PASS
+fi
+
+echo "Test: override spec file macro"
+if rpmbuild -bp --define "_without_python 1" test.spec 2> /dev/null | grep "NO PYTHON"; then
+    echo PASS
+fi
