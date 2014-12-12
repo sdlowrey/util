@@ -17,6 +17,8 @@ alias lrt='ls -lrt'
 export EDITOR=emacs
 alias diff='diff --exclude="*~"'
 
+alias sysinfo='sudo dmidecode |grep -A9 "System Info"'
+
 # git-oriented command prompt
 GIT_PROMPT=/usr/share/git-core/contrib/completion/git-prompt.sh
 [[ -r $GIT_PROMPT ]] && {
