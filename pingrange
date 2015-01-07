@@ -1,6 +1,9 @@
 #!/bin/bash
 # FIXME get options and range from cmdline
 
+# Stop the loop on ctrl-c
+trap "echo -- interrupted --; exit 1" SIGINT
+
 # number of requests
 COUNT=1
 
