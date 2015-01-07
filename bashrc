@@ -14,6 +14,9 @@ alias la='ls -a'
 alias ll='ls -l'
 alias lrt='ls -lrt'
 
+# List the start and elapsed times for processes
+alias puptime='ps -eo pid,comm,lstart,etime'
+
 export EDITOR=emacs
 alias diff='diff --exclude="*~"'
 
