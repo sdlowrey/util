@@ -26,7 +26,7 @@ alias sysinfo='sudo dmidecode |grep -A9 "System Info"'
 GIT_PROMPT=/usr/share/git-core/contrib/completion/git-prompt.sh
 [[ -r $GIT_PROMPT ]] && {
     source $GIT_PROMPT
-    PS1='[\h \W$(__git_ps1 " (%s)")]\$ '
+    PS1='\h $(__git_ps1 "(%s)") \W $ '
 }
 
 # SILO-only changes follow
