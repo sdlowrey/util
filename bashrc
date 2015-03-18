@@ -5,10 +5,18 @@ if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
+macos=false
+[[ $(uname) == "Darwin" ]] && macos=true
+
 # Command shortcuts
 
-# color ls not the default on rhel5
-alias ls='ls --color'
+if ! $macos; then
+    # Linux aliases
+    alias ls='ls --color'
+else
+    # Mac aliases
+    alias ls='ls -G'
+fi
 
 alias la='ls -a'
 alias ll='ls -l'
