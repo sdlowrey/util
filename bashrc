@@ -31,7 +31,9 @@ alias diff='diff --exclude="*~"'
 alias sysinfo='sudo dmidecode |grep -A9 "System Info"'
 
 # git-oriented command prompt
-GIT_PROMPT=/usr/share/git-core/contrib/completion/git-prompt.sh
+SHARE=/usr/share
+$macos && SHARE=/usr/local/share
+GIT_PROMPT=$SHARE/git-core/contrib/completion/git-prompt.sh
 [[ -r $GIT_PROMPT ]] && {
     source $GIT_PROMPT
     PS1='\h $(__git_ps1 "(%s)") \W $ '
