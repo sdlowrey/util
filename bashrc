@@ -1,4 +1,4 @@
-# .bashrc
+# -*- mode: shell-script -*-
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
