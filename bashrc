@@ -40,7 +40,4 @@ GIT_PROMPT=$SHARE/git-core/contrib/completion/git-prompt.sh
 }
 
 # SILO-only changes follow
-
-# for sipe/lync
-export NSS_SSL_CBC_RANDOM_IV=0
 export SVN_URL=svn+ssh://slowrey@dev-svn/svn
