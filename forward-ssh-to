@@ -1,0 +1,4 @@
+#!/bin/bash
+echo "
+rdr pass inet proto tcp from any to any port 2022 -> $1 port 22
+" | sudo pfctl -ef -
