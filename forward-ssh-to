@@ -1,4 +1,20 @@
 #!/bin/bash
-echo "
-rdr pass inet proto tcp from any to any port 2022 -> $1 port 22
-" | sudo pfctl -ef -
+function usage {
+    echo "Usage: $(basename $0) GUEST_IP"
+    echo -e "\nForward port host port 2022 to GUEST_IP.  Use 'none' to disable"
+    exit
+}
+
+[[ $# -lt 1 ]] && usage
+
+# The argument is the IP address of the host/guest to forward to
+GUEST=$1
+
+case $GUEST in
+    disable) sudo pfctl -F all -f /etc/pf.conf && exit ;;
+    show) sudo pfctl -s nat && exit ;;
+esac
+
+# Create the PF rule and feed it directly to the controller
+rule="rdr pass inet proto tcp from any to any port 2022 -> $GUEST port 22"
+echo "$rule" | sudo pfctl -ef -
