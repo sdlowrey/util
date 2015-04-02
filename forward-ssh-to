@@ -1,11 +1,10 @@
 #!/bin/bash
 function usage {
-    echo "Usage: $(basename $0) GUEST_IP"
-    echo -e "\nForward port host port 2022 to GUEST_IP.  Use 'none' to disable"
-    exit
+    echo "Usage: $(basename $0) show | disable | GUEST_IP"
+    echo -e "\nForward port host port 2022 to GUEST_IP."
 }
 
-[[ $# -lt 1 ]] && usage
+[[ $# -lt 1 ]] && usage && exit
 
 # The argument is the IP address of the host/guest to forward to
 GUEST=$1
