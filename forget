@@ -28,7 +28,7 @@ entry=$1
 
 exists $entry || fail "$entry not found in $KNOWN_HOSTS"
 
-sed -i "/$entry/d" $KNOWN_HOSTS
+sed -i -e "/$entry/d" $KNOWN_HOSTS
 
 exists $entry && fail "Failed to remove $entry from $KNOWN_HOSTS"
 
