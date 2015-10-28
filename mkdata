@@ -1,0 +1,13 @@
+#!/bin/bash
+if [ $# -ne 1 ]; then
+    echo "usage: $(basename $0) NUM_FILES"
+    exit 1
+fi
+n=$1
+dir=/data/db/test
+mkdir -p $dir
+for i in $(seq $n); do
+   # block count = 1GiB / block size
+   dd if=/dev/urandom of=$dir/file$i.dat bs=4096 count=262144
+done
+
