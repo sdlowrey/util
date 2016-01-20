@@ -25,10 +25,8 @@ alias lrt='ls -lrt'
 # List the start and elapsed times for processes
 alias puptime='ps -eo pid,comm,lstart,etime'
 
-export EDITOR=emacs
+export EDITOR=vim
 alias diff='diff --exclude="*~"'
-
-alias sysinfo='sudo dmidecode |grep -A9 "System Info"'
 
 # git-oriented command prompt
 GIT_BASH=/usr/share/git-core/contrib/completion
@@ -38,5 +36,8 @@ $macos && GIT_BASH=/usr/local/etc/bash_completion.d
     PS1='\h $(__git_ps1 "(%s)") \W $ '
 }
 
-# SILO-only changes follow
-export SVN_URL=svn+ssh://slowrey@dev-svn/svn
+# virtualenvwrapper
+VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/fugue
+source /usr/local/bin/virtualenvwrapper.sh
