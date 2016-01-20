@@ -1,0 +1,17 @@
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
+[user]
+	name = Scott
+	email = scott@luminal.io
+[alias]
+	st = status
+	br = branch
+	co = checkout
+	ci = commit
+	unstage = reset HEAD --
+	last = log -1 HEAD
+	slog = log --oneline
+[push]
+	default = simple
