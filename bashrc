@@ -28,13 +28,14 @@ alias puptime='ps -eo pid,comm,lstart,etime'
 export EDITOR=vim
 alias diff='diff --exclude="*~"'
 
-# git-oriented command prompt
-GIT_BASH=/usr/share/git-core/contrib/completion
-$macos && GIT_BASH=/usr/local/etc/bash_completion.d
-[[ -r $GIT_BASH/git-prompt.sh ]] && {
-    source $GIT_BASH/git-prompt.sh
-    PS1='\h $(__git_ps1 "(%s)") \W $ '
-}
+# git prompt stuff
+# assuming mac, so use use magicmonty/bash-git-prompt. 
+# if linux, see the previous commit of this file.
+if [ -f "$(brew --prefix bash-git-prompt)/share/gitprompt.sh" ]; then
+    GIT_PROMPT_THEME=Default
+    GIT_PROMPT_ONLY_IN_REPO=1
+    source "$(brew --prefix bash-git-prompt)/share/gitprompt.sh"
+fi
 
 # virtualenvwrapper
 VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
