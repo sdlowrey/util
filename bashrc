@@ -41,3 +41,8 @@ VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/fugue
 source /usr/local/bin/virtualenvwrapper.sh
+
+# Go
+export GOPATH=~/go
+export GOROOT=/usr/local/Cellar/go/1.5.3/libexec
+export PATH=$PATH:$GOPATH/bin:$GOROOT/bin
