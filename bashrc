@@ -47,3 +47,6 @@ source /usr/local/bin/virtualenvwrapper.sh
 export GOPATH=~/go
 export GOROOT=/usr/local/Cellar/go/1.5.3/libexec
 export PATH=$PATH:$GOPATH/bin:$GOROOT/bin
+
+# work only
+[[ -r ~/.dev-setup ]] && source ~/.dev-setup
