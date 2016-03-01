@@ -48,5 +48,10 @@ export GOPATH=~/go
 export GOROOT=/usr/local/Cellar/go/1.5.3/libexec
 export PATH=$PATH:$GOPATH/bin:$GOROOT/bin
 
+# PyEnv - keep this near the end
+export PYENV_ROOT=$HOME/.pyenv
+export PATH=$PYENV_ROOT/bin:$PATH
+eval "$(pyenv init -)"
+
 # work only
 [[ -r ~/.dev-setup ]] && source ~/.dev-setup
