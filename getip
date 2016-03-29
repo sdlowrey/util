@@ -3,5 +3,7 @@
 # Get the public IP address of an EC2 instance by name
 # usage: getid MY_INSTANCE_NAME
 
-aws --output json ec2 describe-instances --filters "Name=tag:Name,Values=$1" |
+aws --output json ec2 describe-instances \
+	--filters "Name=tag:Name,Values=$1" \
+	--filters "Name=instance-state-name,Values=running" |
 	jq .Reservations[0].Instances[0].PublicIpAddress | tr -d "\""
