@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# number of seconds between stat lines; default 3, first arg overrides
+INTERVAL=${1:-3}
+
+# number of lines between headers
+HEADER_INTERVAL=10
+
+header() {
+	echo -e "Time\tQueues\tTopics\tTables\tVars\tCkm"
+}
+
+stats() {
+	T=$(date +%m-%dT%H:%M:%S)
+	q=$(aws sqs list-queues | jq .QueueUrls[] | wc -l)
+	t=$(aws sns list-topics | jq .Topics[].TopicArn | wc -l)
+	d=$(aws dynamodb list-tables | jq .TableNames[] | wc -l)
+	v=$(vars list | wc -l)
+	c=$(vars list | grep commKit | wc -l)
+	echo -e "$T\t$q\t$t\t$d\t$v\t$c"
+}
+
+header_lines=$(seq 1 $HEADER_INTERVAL)
+while true; do
+	header
+	for i in $header_lines; do
+		stats
+		sleep $INTERVAL
+	done
+done
