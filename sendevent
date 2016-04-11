@@ -1,0 +1,9 @@
+#!/bin/bash
+# publish a base64-encoded message to an SNS topic
+#
+# Usage: sendevent MESSAGE TOPIC-ARN
+
+msg=$(echo $1 | base64)
+topic=$2
+
+aws sns publish --topic-arn $topic --message $msg
