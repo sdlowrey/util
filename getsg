@@ -1,0 +1,9 @@
+#!/bin/bash
+#
+# Get security group name from description
+# usage: getsg DESCRIPTION
+
+aws ec2 describe-security-groups \
+	--filters Name=description,Values=$1 \
+	| jq .SecurityGroups[].GroupName \
+	| tr -d '"'
