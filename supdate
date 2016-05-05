@@ -8,6 +8,10 @@
 
 export ipaddr=$(getip "Fugue Conductor")
 
+cfg=$HOME/.ssh/config
+
+cp $cfg $cfg.bck
+
 awk 'BEGIN {
 	FS="\n"
 	RS=""
@@ -21,4 +25,6 @@ awk 'BEGIN {
 		print $0
 	}
 }
-' ~/.ssh/config
+' $cfg > $cfg.new
+[[ $? -ne 0 ]] &&  (echo "failed"; exit 1)
+mv $cfg.new $cfg
