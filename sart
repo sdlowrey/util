@@ -1,0 +1,10 @@
+#!/bin/bash
+# search artifactory
+
+FILE=$1
+
+curl -s -u "$ARTIFACTORY_USER:$ARTIFACTORY_PASSWORD" \
+	-X POST -H 'Content-Type: text/plain' \
+	-H 'Accept: application/json' \
+	https://fugue.artifactoryonline.com/fugue/api/search/aql \
+	-d @$FILE
