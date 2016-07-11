@@ -1,0 +1,21 @@
+#!/bin/bash
+# list aws resources
+
+ddblist='aws dynamodb list-tables | jq .TableNames[]'
+sqslist='aws sqs list-queues | jq .QueueUrls[] | tr -d \""\"' # | sed \"s/https:\/\/queue.amazonaws.com\/[0-9]*\///g\"'
+snslist='aws sns list-topics | jq .Topics[].TopicArn'
+sqslist='aws sqs list-queues | jq .QueueUrls[]'
+sublist='aws sns list-subscriptions | jq .[][].SubscriptionArn'
+vpclist='aws ec2 describe-vpcs | jq .Vpcs[].CidrBlock'
+
+
+echo -e '\nSQS:'
+eval $sqslist | tr -d '"' | sed "s/https:\/\/queue.amazonaws.com\/[0-9]*\///g"
+echo -e '\nSNS:'
+eval $snslist | tr -d '"'
+echo -e '\nDDB:'
+eval $ddblist | tr -d '"'
+echo -e '\nSUBS:'
+eval $sublist | tr -d '"'
+echo -e '\nVPC:'
+eval $vpclist | tr -d '"'
