@@ -1,0 +1,14 @@
+#!/bin/bash
+#
+# pack current directory into pex file
+if [ $# -ne 2 ]; then
+  echo "usage: $(basename $0) PROG_NAME PYTHON_VER"
+  exit 1
+fi
+
+name=$1
+python_ver=$2
+
+zip -qr $name.tgz .bootstrap/ .deps/ PEX-INFO __main__.py
+echo "#!/usr/bin/env python$python_ver" > shebang
+cat shebang $name.tgz > $name
