@@ -6,7 +6,11 @@
 #   fields printed.  This is not ideal. If you add or subtract config lines 
 #   to the "conductor" block, update the first print stmt accordingly.
 
-export ipaddr=$(getip "Fugue Conductor")
+host=${1:?"specify the SSH host name"}
+tag_val=${2:?"specify the instance Name tag value"}
+
+export ipaddr=$(getip $tag_val)
+export hostline="Host $host"
 
 cfg=$HOME/.ssh/config
 
@@ -19,7 +23,7 @@ awk 'BEGIN {
 	ORS="\n\n"
 }
 /Host/ {
-	if ($1 == "Host conductor") {
+	if ($1 == ENVIRON["hostline"]) {
 		print $1, "  HostName " ENVIRON["ipaddr"], $3, $4, $5, $6
 	} else {
 		print $0
