@@ -3,8 +3,8 @@
 	smudge = git-lfs smudge %f
 	required = true
 [user]
-	name = Scott
-	email = scott@luminal.io
+	name = Scott Lowrey
+	email = [update email addr]
 [alias]
 	st = status
 	br = branch
