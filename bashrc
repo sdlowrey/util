@@ -27,8 +27,7 @@ function remote_log {
 alias la='ls -a'
 alias ll='ls -l'
 alias lrt='ls -lrt'
-alias gack='ack --follow --ignore-dir=.tox --ignore-dir=Godeps --ignore-dir=vendor --ignore-dir=.stack-work'
-alias rlog='remote_log conductor /var/log/fugue'
+alias gack='ack --follow --ignore-dir=.tox --ignore-dir=Godeps --ignore-dir=vendor'
 alias path='echo $PATH | tr ":" "\n"'
 
 # aliases: aws
@@ -60,33 +59,26 @@ if [ -f "$(brew --prefix bash-git-prompt)/share/gitprompt.sh" ]; then
     source "$(brew --prefix bash-git-prompt)/share/gitprompt.sh"
 fi
 
-# Go
-export GOPATH=~/go
-export GOROOT=/usr/local/Cellar/go/1.6.2/libexec
-export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
-
 # Python setup: Use pyenv to manage installed python versions and
 # use virtualenvwrapper to manage virtual environments. Bring the
 # two together with pyenv-virtualenvwrapper. 
 # 
 # Can still use virtualenvwrapper commands (eg mkvirtualenv) but
 # this variable will cause pyenv to be used to create the virtualenv
-export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true" 
-export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
+#export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true" 
+#export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
 
 # virtualenvwrapper
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/fugue
-source /usr/local/bin/virtualenvwrapper.sh
+#export WORKON_HOME=$HOME/.virtualenvs
+#export PROJECT_HOME=$HOME/PyCharmProjects
+#source /usr/local/bin/virtualenvwrapper.sh
 
 # PyEnv - keep this near the end
-export PYENV_ROOT=$HOME/.pyenv
-export PATH=$PYENV_ROOT/bin:$PATH
+#export PYENV_ROOT=$HOME/.pyenv
+#export PATH=$PYENV_ROOT/bin:$PATH
 # To enable shims and autocompletion add to your profile:
-if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+#if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 
-# Haskell
-export PATH=$PATH:/Users/scott/.local/bin
 # work only
 [[ -r ~/.dev-setup ]] && source ~/.dev-setup
 
