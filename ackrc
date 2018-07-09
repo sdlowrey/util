@@ -1,0 +1,5 @@
+# tox cache
+--ignore-dir=.tox
+
+# Go vended deps
+--ignore-dir=vendor

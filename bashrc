@@ -27,7 +27,6 @@ function remote_log {
 alias la='ls -a'
 alias ll='ls -l'
 alias lrt='ls -lrt'
-alias gack='ack --follow --ignore-dir=.tox --ignore-dir=Godeps --ignore-dir=vendor'
 alias path='echo $PATH | tr ":" "\n"'
 
 # aliases: aws
