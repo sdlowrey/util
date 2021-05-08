@@ -13,6 +13,7 @@ if ! $macos; then
 else
     # Mac aliases
     alias ls='ls -G'
+    alias pycharm='open -na "PyCharm CE.app"'
 fi
 
 function remote_log {
@@ -83,3 +84,4 @@ fi
 
 # added by travis gem
 [ -f /Users/scott/.travis/travis.sh ] && source /Users/scott/.travis/travis.sh
+
