@@ -1,10 +1,5 @@
 # -*- mode: shell-script -*-
 
-# Source global definitions
-if [ -f /etc/bashrc ]; then
-	. /etc/bashrc
-fi
-
 macos=false
 [[ $(uname) == "Darwin" ]] && macos=true
 if ! $macos; then
@@ -41,9 +36,6 @@ alias sqslist='aws sqs list-queues | jq .QueueUrls[] | tr -d "\""'
 alias sublist='aws sns list-subscriptions | jq .[][].SubscriptionArn'
 alias vpclist='aws ec2 describe-vpcs | jq .Vpcs[].CidrBlock'
 
-# special alias format for hub
-eval "$(hub alias -s)"
-
 # List the start and elapsed times for processes
 alias puptime='ps -eo pid,comm,lstart,etime'
 
@@ -52,36 +44,11 @@ alias diff='diff --exclude="*~"'
 
 # git prompt stuff
 # assuming mac, so use use magicmonty/bash-git-prompt. 
-# if linux, see the previous commit of this file.
-if [ -f "$(brew --prefix bash-git-prompt)/share/gitprompt.sh" ]; then
-    GIT_PROMPT_THEME=Default
+if [ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]; then
     GIT_PROMPT_ONLY_IN_REPO=1
-    source "$(brew --prefix bash-git-prompt)/share/gitprompt.sh"
+    source $HOME/.bash-git-prompt/gitprompt.sh
 fi
-
-# Python setup: Use pyenv to manage installed python versions and
-# use virtualenvwrapper to manage virtual environments. Bring the
-# two together with pyenv-virtualenvwrapper. 
-# 
-# Can still use virtualenvwrapper commands (eg mkvirtualenv) but
-# this variable will cause pyenv to be used to create the virtualenv
-#export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true" 
-#export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
-
-# virtualenvwrapper
-#export WORKON_HOME=$HOME/.virtualenvs
-#export PROJECT_HOME=$HOME/PyCharmProjects
-#source /usr/local/bin/virtualenvwrapper.sh
-
-# PyEnv - keep this near the end
-#export PYENV_ROOT=$HOME/.pyenv
-#export PATH=$PYENV_ROOT/bin:$PATH
-# To enable shims and autocompletion add to your profile:
-#if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 
 # work only
 [[ -r ~/.dev-setup ]] && source ~/.dev-setup
-
-# added by travis gem
-[ -f /Users/scott/.travis/travis.sh ] && source /Users/scott/.travis/travis.sh
 
